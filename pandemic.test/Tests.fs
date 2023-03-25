@@ -11,8 +11,8 @@ module TestUtils =
 open TestUtils
 
 [<Fact>]
-let ``Move player`` () =
-    let game = api.initGame()
-    let game2 = api.movePlayer game (Medic, Drive, Chicago)
+let ``drive to neighbour`` () =
+    let game, _ = api.initGame()
+    let game2, _ = api.movePlayer game (Medic, Drive, Chicago)
     let medic = findPlayer game2 Medic
     Assert.Equal(Chicago, medic.location)
