@@ -1,11 +1,18 @@
 module Tests
 
 open Xunit
-open pandemic.Game
+open pandemic.PandemicDomain
+open pandemic.PandemicImpl
+
+module TestUtils =
+    let findPlayer game role =
+        game.players |> List.find (fun p -> p.role = role)
+
+open TestUtils
 
 [<Fact>]
 let ``Move player`` () =
-    let game = initGame()
-    let game2 = movePlayer game (Medic, Drive, Atlanta)
-    let player = getPlayer game2 Medic
-    Assert.Equal(Atlanta, player.location)
+    let game = api.initGame()
+    let game2 = api.movePlayer game (Medic, Drive, Chicago)
+    let medic = findPlayer game2 Medic
+    Assert.Equal(Chicago, medic.location)
